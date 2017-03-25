@@ -1,12 +1,14 @@
 var Game = {
     width: 640,
-    height: 640
+    height: 640,
+    tileSize: 32
 };
 
 Game.start = function(){
     var c = document.createElement("canvas");
     c.width = this.width;
     c.height = this.height;
+    document.body.insertBefore(c, null);
 
     this.ctx = c.getContext("2d");
 

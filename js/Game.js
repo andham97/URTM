@@ -3,6 +3,29 @@ var Game = {
     height: 640
 };
 
+Game.start = function(){
+    var c = document.createElement("canvas");
+    c.width = this.width;
+    c.height = this.height;
+
+    this.ctx = c.getContext("2d");
+
+    this.mgr = new GameManager();
+
+    this.i = setInterval(function(){Game.tick()}, 1000/60);
+};
+
+Game.tick = function(){
+
+    this.render();
+};
+
+Game.render = function(){
+    this.ctx.fillStyle = "#000";
+    this.ctx.fillRect(0, 0, this.width, this.height);
+
+    this.mgr.render(this.ctx);
+};
 
 /*
 var a = [4];

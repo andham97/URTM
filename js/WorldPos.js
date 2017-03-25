@@ -8,7 +8,7 @@ WorldPos.prototype.getX = function(){
 };
 
 WorldPos.prototype.getY = function(){
-    return this.Y / Game.tileSize;
+    return this.y / Game.tileSize;
 };
 
 WorldPos.prototype.getRealX = function(){
@@ -17,4 +17,24 @@ WorldPos.prototype.getRealX = function(){
 
 WorldPos.prototype.getRealY = function(){
     return this.y;
+};
+
+WorldPos.prototype.intersects = function(pos){
+    var xi = (this.getX() - 1) == pos.getX();
+    var yi = (this.getY() - 1) == pos.getY();
+    if(xi && yi)
+        return false;
+    else if(xi)
+        return true;
+    else if(yi)
+        return true;
+    xi = (this.getX() + 1) == pos.getX();
+    yi = (this.getY() + 1) == pos.getY();
+    if(xi && yi)
+        return false;
+    else if(xi)
+        return true;
+    else if(yi)
+        return true;
+    return false;
 };

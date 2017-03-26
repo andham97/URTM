@@ -13,9 +13,38 @@
     <script src="js/GameManager.js"></script>
     <script src="js/Game.js"></script>
     <script>
+        var running = true;
+        var num = 0;
+        var amt = 0;
+        var time = 0;
+        var interval;
         window.onload = function(){
-            Game.start();
+            Game.start();};
+            /*test();
+            interval = setInterval(function(){
+                test();
+                if(!running)
+                    clearInterval(interval);
+            }, time / num);
+        };
+
+        function test(){
+            var t = new Date().getTime();
+            var w = new World();
+            var i = 0;
+            while(!w.valid){
+                w = new World();
+                i++;
+            }
+            amt += i;
+            num++;
+            time += (new Date().getTime() - t);
+            log();
         }
+
+        function log(){
+            console.log("Iterations: " + (amt / num) + " Time: " + (time / num) + " Number of tests: " + num);
+        }*/
     </script>
 </head>
 <body>

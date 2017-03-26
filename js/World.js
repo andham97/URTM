@@ -39,25 +39,40 @@ function World(){
             }
         }
     }
-    console.log(this.rooms);
-    var r = null;
-    var j = 0;
+    var r = [];
     for(i = 0; i < this.rooms.length; i++){
-        if(!r)
-            r = this.rooms[i];
-        else if(r.size() < this.rooms[i].size) {
+        r.push(this.rooms[i]);
+    }
+    this.rooms = [];
+    var t, k;
+    for(i = 0; i < r.length; i++){
+        if(r[i].size() > 10){
+            this.rooms.push(r[i]);
+            r.splice(i, 1);
+            i--;
+        }
+        else {
+            t = r[i].tiles;
+            for(k = 0; k < t.length; k++){
+                t[k].style = "#000";
+            }
+        }
+    }
+    r = this.rooms[0];
+    var j = 0;
+    for(i = 1; i < this.rooms.length; i++){
+        if(this.rooms[i].size() > r.size()){
             r = this.rooms[i];
             j = i;
         }
     }
-    for(i = 0; i < this.rooms.length; i++){
-        if(i == j)
-            continue;
-        var t = this.rooms[i].tiles;
-        for(var k = 0; k < t.length; k++){
+    for(i = 1; i < this.rooms.length; i++){
+        t = this.rooms[i].tiles;
+        for(k = 0; k < t.length; k++){
             t[k].style = "#000";
         }
     }
+    this.valid = r.size() > 180;
 }
 
 World.prototype.tick = function(){
@@ -71,3 +86,19 @@ World.prototype.render = function(ctx){
         }
     }
 };
+
+World.prototype.walkable = function(x, y){
+    return this.tiles[x][y].style == "#FFF";
+};
+
+function a(x, y){
+    var found = false;
+    var world = Game.mgr.world;
+    for(var i = 0; i < world.rooms.length; i++){
+        if(world.rooms[i].isFit(world.tiles[x][y])){
+            found = true;
+            break;
+        }
+    }
+    return found;
+}

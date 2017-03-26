@@ -20,6 +20,17 @@ WorldPos.prototype.getRealY = function(){
 };
 
 WorldPos.prototype.intersects = function(pos){
+    if((this.getX() - 1) == pos.getX() && this.getY() == pos.getY())
+        return true;
+    else if((this.getX() + 1) == pos.getX() && this.getY() == pos.getY())
+        return true;
+    else if((this.getY() - 1) == pos.getY() && this.getX() == pos.getX())
+        return true;
+    else if((this.getY() + 1) == pos.getY() && this.getX() == pos.getX())
+        return true;
+    else
+        return false;
+    /*
     var xi = (this.getX() - 1) == pos.getX();
     var yi = (this.getY() - 1) == pos.getY();
     if(xi && yi)
@@ -36,5 +47,5 @@ WorldPos.prototype.intersects = function(pos){
         return true;
     else if(yi)
         return true;
-    return false;
+    return false;*/
 };
